@@ -22,11 +22,11 @@ void secuenciaB();
 int main(void) {
 
 
-    void configGPIO();
-    void secuenciaA();
+    configGPIO();
 
     while (1)
     {
+    	secuenciaA();
         /* code */
     }
 
@@ -39,23 +39,23 @@ void configGPIO(){
 
     /*Elijo puerto 0 y 1*/
     LPC_PINCON-> PINSEL0 &= ~(0xffffffff);
-    LPC_PINCON-> PINSEL1 &= ~(0xffffffff);
+    LPC_PINCON-> PINSEL4 &= ~(0xffffffff);
 
-    LPC_PINCON-> PINMODE0 &= ~(0xffffffff);
+    //LPC_PINCON-> PINMODE0 &= ~(0xffffffff);
 
     /*Puerto 0 como salida y puerto 1 como entrada*/
-    LPC_GPIO0-> FIODIR0 |= (0x3);
-    LPC_GPIO1-> FIODIR1 &= (0x0);
+    LPC_GPIO0-> FIODIR |= (1<<22);
+    LPC_GPIO2-> FIODIR &= ~(1<<10);
 
 }
 
 void secuenciaA(){
-    while (LPC_GPIO1-> FIOPIN1 == 0x00)
+    while (LPC_GPIO2-> FIOPIN & (1<<10))
     {
 
-        LPC_GPIO0->FIOSET |= (0x1);
+        LPC_GPIO0->FIOSET |= (1<<22);
         delay(1000);
-        LPC_GPIO0->FIOSET &= (0x0);
+        LPC_GPIO0->FIOCLR |= (1<<22);
         delay(1000);
 
     }
@@ -63,19 +63,19 @@ void secuenciaA(){
 }
 
 void secuenciaB(){
-    while (LPC_GPIO1-> FIOPIN1 == 0x01)
+    while (!(LPC_GPIO2-> FIOPIN & (1<<10)))
     {
 
-        LPC_GPIO0->FIOSET |= (0x1);
+    	LPC_GPIO0->FIOSET |= (1<<22);
         delay(1000);
         delay(1000);
-        LPC_GPIO0->FIOSET &= (0x0);
-        delay(1000);
-
-        LPC_GPIO0->FIOSET |= (0x1);
+        LPC_GPIO0->FIOCLR |= (1<<22);
         delay(1000);
 
-        LPC_GPIO0->FIOSET &= (0x0);
+        LPC_GPIO0->FIOSET |= (1<<22);
+        delay(1000);
+
+        LPC_GPIO0->FIOSET |= (1<<22);
         delay(1000);
         delay(1000);
 
