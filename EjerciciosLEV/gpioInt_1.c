@@ -44,6 +44,9 @@ void EINT3_IRQHandler(void){
          LPC_GPIO0->FIOPIN = secuencia2[];
          delay(1000)
     } 
+
+    LPC_GPIOINT->IO2IntClr |=(1<<0)
+    LPC_GPIOINT->IO2IntClr |=(1<<1)     //clean interrupt
 }
 
 void configGPIO(void){
@@ -62,11 +65,11 @@ void configGpioInt(void){
   
 LPC_GPIOINT->IO2IntEnR |= INPUT1; //P2.0 Rising edge interrupt
 LPC_GPIOINT->IO2IntEnF |=INPUT2; //P2.1 Falling edge interrupt
-NVIC_EnableIRQ(EINT3_IRQn);
+NVIC_EnableIRQ(EINT3_IRQn); // comparte con eint3
   
 }
 
-void delay(uint32_t times) {                   /* Implementarlo con systick */
+void delay(uint32_t times) {                   /* Implementarlo con systick */ 
 	for(uint32_t i=0; i<times; i++)
 		for(uint32_t j=0; j<times; j++); 
 }
