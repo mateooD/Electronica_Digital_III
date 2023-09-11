@@ -17,6 +17,7 @@ int main(void){
     LPC_GPIO0->FIOPIN  &= ~ (0x1<<9);
     delay(30);
 }
+    return 0;
 }
 
 
