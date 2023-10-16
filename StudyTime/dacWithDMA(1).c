@@ -1,16 +1,17 @@
-#include "lpc17xx_dac.h"
+#include "lpc17xx_dac.h"    	//hago llamado a librerias de drivers
 #include "lpc17xx_pinsel.h"
 #include "lpc17xx_gpdma.h"
 
-#define DMA_SIZE 60
-#define NUM_SINE_SAMPLE 60
-#define SINE_FREQ_IN_HZ 50
-#define PCLK_DAC_IN_MHZ 25 //CCLK divided by 4
+#define DMA_SIZE 60			// tamaño de region de memoria que se quiere transf a DAC 
+#define NUM_SINE_SAMPLE 60	// cantidad datos onda senoidal
+#define SINE_FREQ_IN_HZ 50  // salida 50hz (20 ms)
+#define PCLK_DAC_IN_MHZ 25  //CCLK divided by 4 -> "Timer asociado"
+
 void confPin(void);
 void confDMA(void);
 void confDac(void);
-GPDMA_Channel_CFG_Type GPDMACfg;
-uint32_t dac_sine_lut[NUM_SINE_SAMPLE];
+GPDMA_Channel_CFG_Type GPDMACfg; //variable 
+uint32_t dac_sine_lut[NUM_SINE_SAMPLE]; //array que define los datos
 int main(void)
 {
 	uint32_t i;
