@@ -9,8 +9,6 @@
 
  #define SET_PR =
 
-
-
  void configGPIO(void);
  void configEint(void);
  void configTimer0(void);
