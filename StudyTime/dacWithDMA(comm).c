@@ -116,7 +116,8 @@ void confDMA(void){							//Cfg de DMA
 	
 	GPDMACfg.DMALLI = (uint32_t)&DMA_LLI_Struct;// Linker List Item - unused - Se recorre la misma lista
 
-	// Setup channel with given parameter
+	// Setup channel with given parametercada 20 ms[SINE_FREQ_HZ=50Hz]
+	// Cada cuanto tiempo se envia una muestra? 
 	GPDMA_Setup(&GPDMACfg);
 	return;
 }

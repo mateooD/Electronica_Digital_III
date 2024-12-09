@@ -28,7 +28,7 @@
 #define LPC17XX_PINSEL_H_
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc17xx.h"
+#include "LPC17xx.h"
 #include "lpc_types.h"
 
 #ifdef __cplusplus
@@ -184,7 +184,8 @@ void PINSEL_SetI2C0Pins(uint8_t i2cPinMode, FunctionalState filterSlewRateEnable
 #endif /* LPC17XX_PINSEL_H_ */
 
 /**
- * @}
+ * @}8_t Pinnum;        /**< Pin Number, should be PINSEL_PIN_x,
+                        where x sho
  */
 
 /* --------------------------------- End Of File ------------------------------ */
